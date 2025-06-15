@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Welcome, {{ session['user'] }}!</h2>
+  <a href="{{ url_for('create') }}" class="btn btn-success">Register New</a>
+  <a href="{{ url_for('logout') }}" class="btn btn-secondary float-end">Logout</a>
+
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user[0] }}</td>
+        <td>{{ user[1] }}</td>
+        <td>{{ user[2] }}</td>
+        <td>
+          <a href="{{ url_for('update', id=user[0]) }}" class="btn btn-primary btn-sm">Edit</a>
+          <a href="{{ url_for('delete', id=user[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
